@@ -1,0 +1,32 @@
+{
+  "name": "@doctor/download",
+  "version": "0.1.0",
+  "exports": "./src/mod.ts",
+  "exclude": ["**/.*"],
+  "tasks": {
+    "test": "deno test -R='.output/' -W='.output/' -N='example.com' --parallel --trace-leaks --reporter=dot --permit-no-files",
+    "fmt": "deno fmt",
+    "lint": "deno lint",
+    "ok": { "command": "deno task test --doc", "dependencies": ["fmt", "lint"] }
+  },
+  "lint": {
+    "rules": {
+      "tags": ["recommended"],
+      "include": [
+        "camelcase",
+        "explicit-function-return-type",
+        "explicit-module-boundary-types",
+        "no-console",
+        "no-eval",
+        "no-inferrable-types",
+        "no-sparse-arrays",
+        "no-sync-fn-in-async-fn",
+        "no-throw-literal",
+        "no-undef",
+        "prefer-ascii",
+        "single-var-declarator",
+        "verbatim-module-syntax"
+      ]
+    }
+  }
+}
