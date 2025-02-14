@@ -123,7 +123,7 @@ export async function download(
         range: `bytes=${currentSize}-${range?.end ?? ""}`,
         "if-match": etag ?? "",
       };
-      response = await fetch(url, init);
+      response = await retry(() => fetch(url, init), retryDelay);
       if (response.status !== 206) {
         await response.body?.cancel();
         await writable.abort(`Status Code (${response.status}) wasn't 206`);
@@ -133,4 +133,14 @@ export async function download(
   })();
 
   return { readable, headers };
+}
+
+async function retry<T>(fn: () => Promise<T>, retryDelay: number): Promise<T> {
+  while (true) {
+    try {
+      return await fn();
+    } catch {
+      await delay(retryDelay);
+    }
+  }
 }
