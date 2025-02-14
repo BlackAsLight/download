@@ -4,6 +4,13 @@
   "exports": "./src/mod.ts",
   "exclude": ["**/.*"],
   "tasks": {
+    "doc": "deno doc --html --output='.docs/' src/mod.ts",
+    "doc:mac": { "command": "open .docs/index.html", "dependencies": ["doc"] },
+    "doc:lin": {
+      "command": "xdg-open .docs/index.html",
+      "dependencies": ["doc"]
+    },
+    "doc:win": { "command": "start .docs/index.html", "dependencies": ["doc"] },
     "test": "deno test -R='.output/' -W='.output/' -N='example.com' --parallel --trace-leaks --reporter=dot --permit-no-files",
     "fmt": "deno fmt",
     "lint": "deno lint",

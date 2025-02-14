@@ -28,6 +28,11 @@
  * }
  * ```
  *
+ * @param url - The URL to download from.
+ * @param init - The request init options.
+ * @param retryDelay - The delay in milliseconds between retries.
+ * @returns A promise that resolves to an object containing the readable stream and headers.
+ *
  * @module
  */
 
