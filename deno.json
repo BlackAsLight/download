@@ -2,6 +2,9 @@
   "name": "@doctor/download",
   "version": "0.1.0",
   "exports": "./src/mod.ts",
+  "imports": {
+    "@std/async": "jsr:@std/async@^1.0.10"
+  },
   "exclude": ["**/.*"],
   "tasks": {
     "doc": "deno doc --html --output='.docs/' src/mod.ts",

@@ -1,3 +1,5 @@
+import { delay } from "@std/async/delay";
+
 /**
  * # Overview
  * `download` is a function to support automatically resuming interrupted
@@ -35,7 +37,6 @@
  *
  * @module
  */
-
 export async function download(
   url: string | URL,
   init: RequestInit = {},
@@ -116,7 +117,7 @@ export async function download(
       } catch {
         if (init.signal?.aborted) return;
       }
-      await new Promise((a) => setTimeout(a, retryDelay));
+      await delay(retryDelay);
       init.headers = {
         ...init.headers,
         range: `bytes=${currentSize}-${range?.end ?? ""}`,
